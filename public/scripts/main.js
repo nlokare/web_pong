@@ -347,7 +347,8 @@
 
   document.getElementById('canvasId').onmousemove = function(e) {
     MOUSE_X = e.pageX - this.offsetLeft;
-    return MOUSE_Y = e.pageY - this.offsetTop;
+    MOUSE_Y = e.pageY - this.offsetTop;
+    socket.emit('coordinates', {user: window.user, x: MOUSE_X, y: MOUSE_Y});
   };
 
   update = function() {

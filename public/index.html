@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D WebGL Pong</title>
+	<script src="scripts/three.min.js"></script>
+	
+	<link rel="stylesheet" href="styles/main.css">
+
+</head>
+<body>
+	<form>
+		<input id="username" type="text" placeholder="username"></input>
+		<button id="submit">Submit</button>
+	</form>
+	<div id="container">
+		<div id="scores">0-0</div>
+		<div id="instructions">
+
+			<p>Click Game Area to Play</p>
+			<p><small>Requires a WebGL capable browser</small></p>
+			<p><small>Made by Marc Mailhot - <a href="mlht.ca">mlht.ca</a></small></p>
+
+		</div>
+
+	</div>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="scripts/main.js"></script>
+    <script>
+    	window.user = Math.round(Math.random()*10);
+      var socket = io();
+
+      $( "#instructions" ).on('mousemove', function() {
+        socket.emit('coordinates', {user: window.user, x: event.pageX, y: event.pageY});
+      });
+
+      socket.on('user', function (data) {
+      	console.log(data);
+      });
+    </script>
+</body>
+</html>
